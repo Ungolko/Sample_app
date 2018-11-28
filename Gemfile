@@ -22,12 +22,13 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 
 gem 'sdoc', '~>0.4.0', group: :doc
+gem 'web-console', group: :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'sqlite3'
-  gem 'web-console'
+
   gem 'spring', '~>1.1.3'
   gem 'bootsnap'
 end
@@ -49,6 +50,7 @@ group :test do
   #gem 'chromedriver-helper'
   gem 'minitest-reporters', '~>1.0.5'
   gem 'mini_backtrace', '~>0.1.3'
+  gem 'guard'
   gem 'guard-minitest', '~>2.3.1'
 end
 
