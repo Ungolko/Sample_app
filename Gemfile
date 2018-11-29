@@ -21,6 +21,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 gem 'jquery-rails'
 gem 'bootstrap-sass'
+gem 'bcrypt'
 
 gem 'sdoc', '~>0.4.0', group: :doc
 gem 'web-console', group: :development
