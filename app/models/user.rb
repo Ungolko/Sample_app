@@ -27,4 +27,19 @@ class User < ApplicationRecord
     self.remember_token= User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))
   end
+
+  def authenticated?(remember_token)
+    return false if remember_digest.nil?
+    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    # Using Bcrypt you can also write BCrypt::Password.new(remember_digest)==remember_token
+    # remember_token here is not remember_token from attr_accessor
+    # its local method variable
+    # remember_digest here is automaticaly user.remember_digest
+    # created by Active Record
+  end
+
+# cookies hash delete
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
 end
