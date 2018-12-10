@@ -13,9 +13,9 @@ class UserTest < ActiveSupport::TestCase
 
 # Two browsers test
   test "authenticated? should return false for a user with nil digest" do
-    assert_not @user.authenticated?('')
+    assert_not @user.authenticated?(:remember, '')
   end
- 
+
   test "name should be present" do
    @user.name= " "
    assert_not @user.valid?
