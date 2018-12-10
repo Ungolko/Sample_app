@@ -22,6 +22,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'bcrypt'
+gem 'faker'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 
 gem 'sdoc', '~>0.4.0', group: :doc
 gem 'web-console', group: :development
