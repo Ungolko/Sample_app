@@ -23,6 +23,8 @@ gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'bcrypt'
 gem 'faker'
+gem 'carrierwave', '1.2.2'
+gem 'mini_magick', '4.7.0'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 
@@ -61,6 +63,7 @@ end
 
 group :production do
   gem 'pg', '~>0.17.1'
+  gem 'fog'
   gem 'rails_12factor', '~>0.0.2'
 end
 

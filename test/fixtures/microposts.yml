@@ -1,0 +1,46 @@
+orange:
+  content: "I just ate an orange"
+  created_at: <%= 10.minute.ago %>
+  user: michael
+
+work:
+  content: "Sux"
+  created_at: <%= 3.year.ago %>
+  user: michael
+
+cat_video:
+  content: "Look at this cat"
+  created_at: <%= 2.hour.ago %>
+  user: michael
+
+most_recent:
+  content: "First!"
+  created_at: <%= Time.zone.now %>
+  user: michael
+
+<% 30.times do |n| %>
+micropost_<%= n %>:
+  content: <%= Faker::Lorem.sentence(5) %>
+  created_at: <%= 42.days.ago %>
+  user: michael
+<% end %>
+
+ants:
+  content: "You got ants!"
+  created_at: <%= 2.years.ago %>
+  user: archer
+
+zone:
+  content: "Danger zone!"
+  created_at: <%= 3.days.ago %>
+  user: archer
+
+tone:
+  content: "Rickrolled"
+  created_at: <%= 10.minutes.ago %>
+  user: lana
+
+van:
+  content: "Look at my horse"
+  created_at: <%= 4.hours.ago %>
+  user: lana

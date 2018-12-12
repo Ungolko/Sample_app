@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :microposts, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save :downcase_email
   #changed from {self.email=email.downcase}
@@ -77,6 +78,10 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
+# proto feed
+  def feed
+    Micropost.where("user_id=?", id)
+  end
 
 
   private
