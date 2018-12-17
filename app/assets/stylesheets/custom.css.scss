@@ -29,6 +29,7 @@ textarea {
   text-align: center;
   h1 {
   margin-bottom: 10px;
+  color: $brand-success;
  }
 }
  /* text rules*/
@@ -50,6 +51,9 @@ textarea {
    text-align: center;
    font-weight: normal;
    color: $gray-light;
+   a {
+     color: $brand-success;
+   }
  }
 
  p {
@@ -90,6 +94,9 @@ textarea {
 
    small {
     float: left;
+    font-size: 1.5em;
+    color: $brand-success;
+    margin-left: 60px;
 }
 
    ul {
