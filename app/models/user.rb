@@ -1,5 +1,14 @@
 class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
+  has_many :active_relationships, class_name: "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent: :destroy
+  has_many :passive_relationships, class_name: "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent: :destroy
+  #search for followed_id key in relationships table
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save :downcase_email
   #changed from {self.email=email.downcase}
@@ -80,7 +89,42 @@ class User < ApplicationRecord
 
 # proto feed
   def feed
-    Micropost.where("user_id=?", id)
+    # another rails simplification
+    # following_ids is actually following.map(&:id) OR following.map{ |i| i.to_s }
+    # made by Active Record based on has_many :following
+    # it creates massive of id followings and users id itself
+    # ? - is interpritated by SQL correctly
+    # it puts our massive of ids in request
+
+    # Micropost.where("user_id IN (?) OR user_id=?", following_ids, id)
+
+    # version 2.0,  instead of ? we used variables
+    # Micropost.where("user_id IN (:following_ids) OR user_id = :user_id",
+    #            following_ids: following_ids, user_id: id)
+
+    # and ver2.1 with SQL subrequest
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE  follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: id)
+
+  end
+
+  def follow(other_user)
+    # old listing
+    # active_relationships.create(followed_id: other_user.id)
+    # new one
+    following << other_user
+  end
+
+  def unfollow(other_user)
+    # old listing
+    # active_relationships.find_by(followed_id: other_user.id).destroy
+    following.delete(other_user)
+  end
+
+  def following?(other_user)
+    following.include?(other_user)
   end
 
 
